@@ -531,17 +531,17 @@ const projects = {
 
         images: [
 
-            "images/game-projects/table-tennis-2d/Table tennis.png",
+            "images/game-projects/table-tennis-2d/Table tennis.jpg",
 
-            "images/game-projects/table-tennis-2d/Table tennis 1.png",
+            "images/game-projects/table-tennis-2d/Table tennis 1.jpg",
 
-            "images/game-projects/table-tennis-2d/Table tennis 2.png",
+            "images/game-projects/table-tennis-2d/Table tennis 2.jpg",
 
-            "images/game-projects/table-tennis-2d/Table tennis 3.png",
+            "images/game-projects/table-tennis-2d/Table tennis 3.jpg",
 
-            "images/game-projects/table-tennis-2d/Table tennis 4.png",
+            "images/game-projects/table-tennis-2d/Table tennis 4.jpg",
 
-            "images/game-projects/table-tennis-2d/Table tennis 5.png"
+            "images/game-projects/table-tennis-2d/Table tennis 5.jpg"
 
         ]
 
@@ -1132,3 +1132,86 @@ if (currentYear) {
 
 updateBackToTop();
 updateActiveNavigation();
+
+/* =========================================================
+   PROFILE IMAGE SLIDESHOW
+========================================================= */
+
+const profileSlideshow =
+    document.getElementById("profile-slideshow");
+
+const profileDots =
+    document.querySelectorAll(".profile-dot");
+
+const profileImages = [
+    "images/profile/Ravi Sinthusan profile.png",
+    "images/profile/Ravi Sinthusan profile-2.png",
+    "images/profile/Ravi Sinthusan profile-3.png"
+];
+
+let profileImageIndex = 0;
+
+function changeProfileImage() {
+
+    profileSlideshow.classList.add("profile-fade");
+
+    setTimeout(() => {
+
+        profileImageIndex++;
+
+        if (profileImageIndex >= profileImages.length) {
+            profileImageIndex = 0;
+        }
+
+        profileSlideshow.src =
+            profileImages[profileImageIndex];
+
+        profileDots.forEach(dot =>
+            dot.classList.remove("active")
+        );
+
+        profileDots[profileImageIndex]
+            .classList.add("active");
+
+        profileSlideshow.classList.remove("profile-fade");
+
+    }, 300);
+}
+
+setInterval(changeProfileImage, 4000);
+
+/* =====================================================
+   SKILL BAR SCROLL ANIMATION
+===================================================== */
+
+const skillsSection = document.querySelector("#skills");
+const skillProgressBars = document.querySelectorAll(".skill-progress");
+
+if (skillsSection && skillProgressBars.length > 0) {
+
+    const skillsObserver = new IntersectionObserver((entries) => {
+
+        entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+                skillProgressBars.forEach((bar, index) => {
+
+                    setTimeout(() => {
+                        bar.classList.add("animate");
+                    }, index * 100);
+
+                });
+
+                skillsObserver.unobserve(skillsSection);
+            }
+
+        });
+
+    }, {
+        threshold: 0.25
+    });
+
+    skillsObserver.observe(skillsSection);
+}
+

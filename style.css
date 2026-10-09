@@ -2240,3 +2240,29 @@ ul {
 
     margin-left: 25px;
 }
+
+/* Logo disappears and reappears continuously */
+
+.animated-logo {
+    display: inline-block;
+    animation: logoFade 3s ease-in-out infinite;
+}
+
+@keyframes logoFade {
+    0%, 100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    45%, 55% {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .animated-logo {
+        animation: none;
+    }
+}
